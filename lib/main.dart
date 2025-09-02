@@ -11,7 +11,6 @@ Future<void> main() async {
   runApp(const TeraUlangApp());
 }
 
-//test
 class TeraUlangApp extends StatelessWidget {
   const TeraUlangApp({super.key});
 
