@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "790837485145",
+    "firebase_url": "https://tera-ulang-e5e72-default-rtdb.firebaseio.com",
+    "project_id": "tera-ulang-e5e72",
+    "storage_bucket": "tera-ulang-e5e72.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790837485145:android:ea4b757193f2c635875b48",
+        "android_client_info": {
+          "package_name": "com.example.tera_ulang"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKOAAb5hYpkqUYdXSQxGWPiQwLpEm6DUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
