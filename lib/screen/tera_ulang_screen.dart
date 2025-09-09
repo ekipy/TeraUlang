@@ -227,6 +227,7 @@ class _TeraUlangScreenState extends State<TeraUlangScreen> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final isTablet = size.width > 600;
@@ -256,20 +257,17 @@ class _TeraUlangScreenState extends State<TeraUlangScreen> {
                 ),
                 child: Row(
                   children: [
-                    // Tombol back
                     IconButton(
                       icon: const Icon(
                         Icons.arrow_back_ios_new,
                         color: Colors.black,
                         size: 20,
                       ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+                      onPressed: () => Navigator.pop(context),
                     ),
                     const SizedBox(width: 16),
 
-                    // Info User
+                    /// Info user
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -308,7 +306,6 @@ class _TeraUlangScreenState extends State<TeraUlangScreen> {
                       ),
                     ),
 
-                    // Avatar
                     CircleAvatar(
                       radius: isTablet ? 30 : 24,
                       backgroundColor: Colors.transparent,
@@ -325,7 +322,7 @@ class _TeraUlangScreenState extends State<TeraUlangScreen> {
             ),
           ),
 
-          /// BODY (form) dengan rounded top & background image
+          /// BODY
           Container(
             margin: EdgeInsets.only(top: headerH - 16),
             decoration: const BoxDecoration(
@@ -338,165 +335,174 @@ class _TeraUlangScreenState extends State<TeraUlangScreen> {
                 topRight: Radius.circular(24),
               ),
             ),
-            child: Form(
-              key: _form,
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.fromLTRB(16, 24, 16, 32),
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    // Nama Pemilik
-                    _buildInputField(
-                      controller: _nama,
-                      hint: 'Nama Pemilik UTTP',
-                      validator: (v) =>
-                          (v == null || v.isEmpty) ? 'Wajib diisi' : null,
-                    ),
-                    const SizedBox(height: 15),
+            child: Column(
+              children: [
+                /// FORM (scrollable)
+                Expanded(
+                  child: Form(
+                    key: _form,
+                    child: SingleChildScrollView(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: isTablet ? 24 : 16,
+                      ).copyWith(top: 24, bottom: 20),
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          _buildInputField(
+                            controller: _nama,
+                            hint: 'Nama Pemilik UTTP',
+                            validator: (v) =>
+                                (v == null || v.isEmpty) ? 'Wajib diisi' : null,
+                          ),
+                          const SizedBox(height: 15),
 
-                    // Pasar
-                    _buildDropdownField(
-                      hint: 'Pilih Alamat',
-                      value: _pasar,
-                      items: _pasarOptions,
-                      onChanged: (v) => setState(() => _pasar = v),
-                    ),
-                    const SizedBox(height: 15),
+                          _buildDropdownField(
+                            hint: 'Pilih Alamat',
+                            value: _pasar,
+                            items: _pasarOptions,
+                            onChanged: (v) => setState(() => _pasar = v),
+                          ),
+                          const SizedBox(height: 15),
 
-                    // Kecamatan
-                    _buildDropdownField(
-                      hint: 'Pilih Kecamatan',
-                      value: _kecamatan,
-                      items: _kecamatanOptions,
-                      onChanged: (v) => setState(() => _kecamatan = v),
-                    ),
-                    const SizedBox(height: 15),
+                          _buildDropdownField(
+                            hint: 'Pilih Kecamatan',
+                            value: _kecamatan,
+                            items: _kecamatanOptions,
+                            onChanged: (v) => setState(() => _kecamatan = v),
+                          ),
+                          const SizedBox(height: 15),
 
-                    // Nomor HP
-                    _buildInputField(
-                      controller: _hp,
-                      hint: 'Nomor HP',
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [DigitsOnlyFormatter()],
-                      validator: (v) =>
-                          (v == null || v.isEmpty) ? 'Wajib diisi' : null,
-                    ),
-                    const SizedBox(height: 15),
-
-                    // Jenis Timbangan
-                    _buildDropdownField(
-                      hint: 'Pilih Timbangan',
-                      value: _jenis,
-                      items: _jenisOptions,
-                      onChanged: (v) => setState(() => _jenis = v),
-                    ),
-                    const SizedBox(height: 15),
-
-                    // Kapasitas dan Satuan
-                    Row(
-                      children: [
-                        Expanded(
-                          child: _buildInputField(
-                            controller: _kapasitas,
-                            hint: 'Kapasitas',
+                          _buildInputField(
+                            controller: _hp,
+                            hint: 'Nomor HP',
                             keyboardType: TextInputType.number,
                             inputFormatters: [DigitsOnlyFormatter()],
                             validator: (v) =>
                                 (v == null || v.isEmpty) ? 'Wajib diisi' : null,
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: _kapasitasTerisi
-                              ? _buildDropdownField(
-                                  hint: 'Satuan',
-                                  value: _satuan,
-                                  items: const ['Kilogram', 'Gram'],
-                                  onChanged: (v) => setState(() => _satuan = v),
-                                )
-                              : const SizedBox(),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 15),
+                          const SizedBox(height: 15),
 
-                    // Anak Timbangan
-                    _buildInputField(
-                      controller: _anak,
-                      hint: 'Anak Timbangan',
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [DigitsOnlyFormatter()],
-                      validator: (v) =>
-                          (v == null || v.isEmpty) ? 'Wajib diisi' : null,
-                    ),
-                    const SizedBox(height: 15),
-
-                    // Biaya dengan Rupiah format
-                    _buildInputField(
-                      controller: _biaya,
-                      hint: 'Biaya',
-                      keyboardType: TextInputType.number,
-                      // Hindari formatter yang hanya digit karena kita menulis "Rp " & titik secara programatik
-                      onChanged: (value) {
-                        final digits = value.replaceAll(RegExp(r'[^0-9]'), '');
-                        final number = int.tryParse(digits) ?? 0;
-                        final formatted = _rupiah.format(number);
-                        // Update controller agar caret selalu di akhir
-                        _biaya.value = TextEditingValue(
-                          text: formatted,
-                          selection: TextSelection.collapsed(
-                            offset: formatted.length,
+                          _buildDropdownField(
+                            hint: 'Pilih Jenis Timbangan',
+                            value: _jenis,
+                            items: _jenisOptions,
+                            onChanged: (v) => setState(() => _jenis = v),
                           ),
-                        );
-                      },
-                      validator: (v) =>
-                          (v == null || v.isEmpty) ? 'Wajib diisi' : null,
-                    ),
-                    const SizedBox(height: 15),
+                          const SizedBox(height: 15),
 
-                    // Tanggal
-                    GestureDetector(
-                      onTap: _pickDate,
-                      child: AbsorbPointer(
-                        child: _buildInputField(
-                          hint: _tanggal == null
-                              ? 'Pilih Tanggal'
-                              : DateFormat(
-                                  'dd MMM yyyy',
-                                  'id_ID',
-                                ).format(_tanggal!),
-                        ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: _buildInputField(
+                                  controller: _kapasitas,
+                                  hint: 'Kapasitas',
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [DigitsOnlyFormatter()],
+                                  validator: (v) => (v == null || v.isEmpty)
+                                      ? 'Wajib diisi'
+                                      : null,
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: _kapasitasTerisi
+                                    ? _buildDropdownField(
+                                        hint: 'Satuan',
+                                        value: _satuan,
+                                        items: const ['Kilogram', 'Gram'],
+                                        onChanged: (v) =>
+                                            setState(() => _satuan = v),
+                                      )
+                                    : const SizedBox(),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+
+                          _buildInputField(
+                            controller: _anak,
+                            hint: 'Anak Timbangan',
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [DigitsOnlyFormatter()],
+                            validator: (v) =>
+                                (v == null || v.isEmpty) ? 'Wajib diisi' : null,
+                          ),
+                          const SizedBox(height: 15),
+
+                          _buildInputField(
+                            controller: _biaya,
+                            hint: 'Biaya',
+                            keyboardType: TextInputType.number,
+                            onChanged: (value) {
+                              final digits = value.replaceAll(
+                                RegExp(r'[^0-9]'),
+                                '',
+                              );
+                              final number = int.tryParse(digits) ?? 0;
+                              final formatted = _rupiah.format(number);
+                              _biaya.value = TextEditingValue(
+                                text: formatted,
+                                selection: TextSelection.collapsed(
+                                  offset: formatted.length,
+                                ),
+                              );
+                            },
+                            validator: (v) =>
+                                (v == null || v.isEmpty) ? 'Wajib diisi' : null,
+                          ),
+                          const SizedBox(height: 15),
+
+                          GestureDetector(
+                            onTap: _pickDate,
+                            child: AbsorbPointer(
+                              child: _buildInputField(
+                                hint: _tanggal == null
+                                    ? 'Pilih Tanggal'
+                                    : DateFormat(
+                                        'dd MMM yyyy',
+                                        'id_ID',
+                                      ).format(_tanggal!),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 30),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 30),
-
-                    // Submit Button
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: _submit,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFF7CD38),
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        child: const Text(
-                          'Simpan',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+
+                /// BUTTON (fixed)
+                SafeArea(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: isTablet ? 24 : 16,
+                    ),
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: _submit,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFF7CD38),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Text(
+                        'Simpan',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ],
             ),
           ),
         ],

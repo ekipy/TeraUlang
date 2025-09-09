@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     {"icon": Icons.scale, "title": "Tera Ulang", "screen": '/tera_form'},
     {"icon": Icons.dataset, "title": "Data Tera Ulang", "screen": '/data'},
     {"icon": Icons.monitor, "title": "Monitoring", "screen": '/monitoring'},
-    {"icon": Icons.bar_chart, "title": "E-Cerapan", "screen": '/report'},
+    {"icon": Icons.bar_chart, "title": "Report", "screen": '/report'},
   ];
 
   Future<void> _logout() async {
@@ -177,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               title: item["title"],
                               isLoading: isLoading,
                               onTap: () {
-                                if (item["title"] == "E-Cerapan") {
+                                if (item["title"] == "Report") {
                                   showModalBottomSheet(
                                     context: context,
                                     isScrollControlled: true,
