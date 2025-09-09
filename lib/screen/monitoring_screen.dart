@@ -434,7 +434,7 @@ Widget _buildDefaultState(Size size) {
         ),
         const SizedBox(height: 12),
         Text(
-          'Klik tanggal bertanda untuk melihat detail tera',
+          'Klik tanggal bertanda untuk melihat detail Tera Data',
           textAlign: TextAlign.center,
           style: GoogleFonts.poppins(
             fontSize: size.width * 0.04,
