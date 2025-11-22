@@ -161,11 +161,13 @@ class _LoginScreenState extends State<LoginScreen>
                           ),
                           SizedBox(height: 20.h),
                           TextField(
+                            key: const Key('emailField'),
                             controller: emailController,
                             decoration: _inputDecoration("Email", Icons.email),
                           ),
                           SizedBox(height: 16.h),
                           TextField(
+                            key: const Key('passwordField'),
                             controller: passwordController,
                             obscureText: true,
                             decoration: _inputDecoration(
@@ -177,6 +179,7 @@ class _LoginScreenState extends State<LoginScreen>
 
                           /// Tombol login
                           ElevatedButton(
+                            key: const Key('loginButton'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF0D47A1),
                               elevation: 0,

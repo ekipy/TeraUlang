@@ -121,6 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     IconButton(
+                      key: const Key('logoutButton'),
                       icon: Icon(
                         Icons.logout,
                         size: isTablet ? 28 : 24,
@@ -173,6 +174,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (context, index) {
                             final item = menuItems[index];
                             return _DashboardCard(
+                              key: Key(
+                                'menu_${item["title"].toString().toLowerCase().replaceAll(" ", "_")}',
+                              ),
                               icon: item["icon"],
                               title: item["title"],
                               isLoading: isLoading,
@@ -242,6 +246,7 @@ class _DashboardCard extends StatefulWidget {
   final VoidCallback onTap;
 
   const _DashboardCard({
+    super.key,
     required this.icon,
     required this.title,
     required this.isLoading,
